@@ -55,10 +55,13 @@ public class Items extends Actor
         Actor object;
         if (isTouching(Desktop.class)) {
             object = checkBottom(MyWorld.desk);
+        } else if (isTouching(Burner.class)) {
+            object = checkBottom(MyWorld.burner);
+            
         } else {
             object = checkBottom(this);
         }
-        if (!isGrounded() && !isSelfColliding() || object == null) {
+        if (!isGrounded() && !isSelfColliding() && object == null) {
             ySpeed += GRAVITY;
             setLocation(getX(),getY() + ySpeed);
         } else {
@@ -78,7 +81,7 @@ public class Items extends Actor
 
     private boolean isSelfColliding() {
         boolean selfCollide = false;
-        if (isTouching(Beaker.class)) {
+        if (isTouching(this.getClass())) {
             selfCollide = true;
         }
         return selfCollide;
