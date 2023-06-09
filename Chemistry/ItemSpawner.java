@@ -30,7 +30,7 @@ public class ItemSpawner extends Actor
             if (itemID == 0) {
                 getWorld().addObject(new Beaker(), this.getX(), this.getY());
             } else if (itemID == 1) {
-                
+                getWorld().addObject(new Test_Tube(), this.getX(), this.getY());
             }
         }
     }

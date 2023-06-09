@@ -12,10 +12,5 @@ public class Beaker extends Items
     public void act()
     {
         super.act();
-        beakerCollision();
-    }
-    
-    private void beakerCollision() {
-        
     }
 }
