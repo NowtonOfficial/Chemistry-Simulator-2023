@@ -14,7 +14,10 @@ public class Items extends Actor
     public void act()
     {
         if (!onScreen()) {
-            System.out.println("GONE!");
+            if (this.getClass() == Beaker.class) {
+                MyWorld.beakers.remove(MyWorld.beakers.indexOf(this));
+                Beaker.lowerBeakerIndex();
+            }
             getWorld().removeObject(this);
             return;
         }
@@ -25,7 +28,6 @@ public class Items extends Actor
         } else {
             gravity();
         }
-
     }
     // Check if Item is On Screen
     private boolean onScreen() {
@@ -57,17 +59,22 @@ public class Items extends Actor
             object = checkBottom(MyWorld.desk);
         } else if (isTouching(Burner.class)) {
             object = checkBottom(MyWorld.burner);
-            
         } else {
             object = checkBottom(this);
         }
-        if (!isGrounded() && !isSelfColliding() && object == null) {
+        if (!isGrounded() && object == null) {
             ySpeed += GRAVITY;
             setLocation(getX(),getY() + ySpeed);
         } else {
             ySpeed = 0;
             int objectHeight = object.getImage().getHeight();
-            setLocation(getX(), object.getY() - objectHeight / 2 - height / 2 + 1);
+            if (isTouching(Burner.class) && !Burner.getContact()) {
+                setLocation(object.getX(), object.getY() - objectHeight / 2 - height / 2 + 1);
+                Burner.setContact(true);
+            } else {
+                setLocation(getX(), object.getY() - objectHeight / 2 - height / 2 + 1);
+                Burner.setContact(false);
+            }
         }
     }
 
@@ -86,7 +93,7 @@ public class Items extends Actor
         }
         return selfCollide;
     }
-    
+
     private Actor checkBottom(Actor actor) {
         int height = getImage().getHeight();
         int width = getImage().getWidth();

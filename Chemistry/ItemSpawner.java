@@ -10,7 +10,6 @@ public class ItemSpawner extends Actor
     
     int itemID;
     public ItemSpawner(String type) {
-
         if (type.equalsIgnoreCase("beakers")) {
             image = new GreenfootImage(150,110);
             image.setColor(new Color(235,87,12));
@@ -29,8 +28,9 @@ public class ItemSpawner extends Actor
         if (Greenfoot.mouseClicked(this)) {
             if (itemID == 0) {
                 getWorld().addObject(new Beaker(), this.getX(), this.getY());
+                Beaker.raiseBeakerIndex();
             } else if (itemID == 1) {
-                getWorld().addObject(new Test_Tube(), this.getX(), this.getY());
+                getWorld().addObject(new Flask(), this.getX(), this.getY());
             }
         }
     }
