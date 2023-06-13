@@ -40,7 +40,7 @@ public class Items extends Actor
 
     // Mouse is being held checker
     private boolean mouseIsDown = false;
-    private boolean isBeingHeld() {
+    protected boolean isBeingHeld() {
         if (Greenfoot.mousePressed(this)) {
             mouseIsDown = true;
         } else if (Greenfoot.mouseClicked(this)) {
@@ -94,7 +94,7 @@ public class Items extends Actor
         return selfCollide;
     }
 
-    private Actor checkBottom(Actor actor) {
+    protected Actor checkBottom(Actor actor) {
         int height = getImage().getHeight();
         int width = getImage().getWidth();
         Actor object = null;

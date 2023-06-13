@@ -24,4 +24,7 @@ public class MyWorld extends World
         
         beakers = new ArrayList();
     }
+    public void act() {
+        Beaker.resetHasPoured();
+    }
 }

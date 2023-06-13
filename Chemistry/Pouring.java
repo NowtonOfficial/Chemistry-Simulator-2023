@@ -8,7 +8,7 @@ public class Pouring extends Particles
 {
     public Pouring() {
         super(0);
-        GreenfootImage img = new GreenfootImage("pour.png");
+        GreenfootImage img = new GreenfootImage("images/particles/pour.png");
         setImage(img);
     }
     @Override

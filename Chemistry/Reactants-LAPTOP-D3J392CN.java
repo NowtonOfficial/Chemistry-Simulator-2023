@@ -14,9 +14,7 @@ public class Reactants extends Actor
     int g = Greenfoot.getRandomNumber(255);
     int b = Greenfoot.getRandomNumber(255);
     int alpha = Greenfoot.getRandomNumber(70) +100;
-    private int phase;
     public Reactants(int phaseType) {
-        phase = phaseType;
         if (phaseType == 1) {
             GreenfootImage img = new GreenfootImage(66,70);
             img.setColor(new Color(r,g,b,alpha)); 
@@ -24,10 +22,20 @@ public class Reactants extends Actor
             setImage(img);
         }
     }
+    Actor beaker = (Actor) MyWorld.beakers.get(Beaker.getBeakerIndex());
     public void act()
     {
-        
+        if (!onScreen()) {
+            getWorld().removeObject(this);
+            return;
+        }
+        if (!MyWorld.beakers.isEmpty()) {
+            setLocation(beaker.getX()+1,beaker.getY()+6);
+        } else {
+            getWorld().removeObject(this);
+        }
     }
+
     private boolean onScreen() {
         boolean onScreen = true;
         if (getX() < 10 || getX() > 1010 || getY() > 610) {
@@ -35,8 +43,4 @@ public class Reactants extends Actor
         }
         return onScreen;
     }
-    public int getPhaseType() {
-        return phase;
-    }
-
 }

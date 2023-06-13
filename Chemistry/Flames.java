@@ -13,7 +13,7 @@ public class Flames extends Particles
         changeInterval = 8;
         finalMultiplier = 4;
         imageName = "fire";
-        GreenfootImage img = new GreenfootImage("fire4.png");
+        GreenfootImage img = new GreenfootImage("images/particles/fire4.png");
         img.scale((int) (img.getWidth() * SCALE_FACTOR), (int) (img.getHeight() * SCALE_FACTOR));
         setImage(img);
     }

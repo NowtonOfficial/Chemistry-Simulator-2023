@@ -22,10 +22,10 @@ public class Particles extends Actor
         animator();
     }
 
-    protected void animator() {
+    private void animator() {
         if (animationCounter % changeInterval == 0 && animationCounter <= changeInterval * finalMultiplier) {
             int interval = animationCounter / changeInterval;
-            GreenfootImage img = new GreenfootImage(imageName +interval+".png");
+            GreenfootImage img = new GreenfootImage("images/particles/"+imageName +interval+".png");
             img.scale((int) (img.getWidth() * SCALE_FACTOR), (int) (img.getHeight() * SCALE_FACTOR));
             setImage(img);
         }

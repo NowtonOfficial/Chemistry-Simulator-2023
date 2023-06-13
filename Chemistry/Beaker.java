@@ -9,6 +9,7 @@ public class Beaker extends Items
     private Boiling bubbles = new Boiling();
     private static Pouring pour = new Pouring();
     private static int beakerIndex = -1;
+    public Liquids reactant;
     public Beaker() {
         super("beaker.png");
         MyWorld.beakers.add(this);
@@ -17,9 +18,39 @@ public class Beaker extends Items
     private boolean canBoil = false;
     public void act()
     {
+        if (reactant != null) {
+            if (reactant.getPhaseType() == 1) {
+                canBoil = true;
+                canPour = true;
+                boilTheBeaker();
+            }
+            updateReactantPosition();
+            if (isTouching(Beaker.class) && Greenfoot.mouseClicked(this)) {
+                setBeakerReactant();
+            }
+        } else {
+            if (isTouching(Chemical_Shelf.class)) {
+                addingAReactant();
+            }
+        }
+        super.act();
+    }
+
+    private void addingAReactant() {
+        reactant = new Liquids("","",100);
+        getWorld().addObject(reactant,getX(), getY());
+    } 
+
+    private void updateReactantPosition() {
+        Actor beaker = (Actor) MyWorld.beakers.get(MyWorld.beakers.indexOf(this));
+        reactant.setLocation(beaker.getX() + 1, beaker.getY() +6);
+    }
+    private boolean hasIndicator = false;
+    private boolean canPour = false;
+    private void boilTheBeaker() {
         if (isTouching(Flames.class) && canBoil) {
             if (!isBoiling) {
-                Actor beaker = (Actor) MyWorld.beakers.get(0);
+                Actor beaker = (Actor) MyWorld.beakers.get(MyWorld.beakers.indexOf(this));
                 getWorld().addObject(bubbles, beaker.getX(),beaker.getY());
                 isBoiling = true;
             }
@@ -30,35 +61,23 @@ public class Beaker extends Items
             isBoiling = false;
         }
         bubbles.setLocation(getX()+3,getY()-50);
-        if (isTouching(Liquids.class)) {
-            canBoil = true;
-        } else {
-            canBoil = false;
-        }
-        beakerCollisions();
-        addingAReactant();
-        super.act();
     }
-    private boolean hasIndicator = false;
-    private boolean canPour = false;
-    private void beakerCollisions() {
-        if (isTouching(Beaker.class) && canPour) {
-            if (!hasIndicator) {
-                getWorld().addObject(pour,getX(), getY() - 60);
-                hasIndicator = true;
-            }
-        } else {
-            if (hasIndicator) {
-                getWorld().removeObject(pour);
-                hasIndicator = false;
-            }
+    private static boolean hasPoured = false;
+    public static void resetHasPoured() {
+        hasPoured = false;
+    }
+    public void setBeakerReactant() {
+        Beaker object = (Beaker) getOneIntersectingObject(Beaker.class);
+        if (!object.hasPoured) {
+            object.reactant = this.reactant;
+            this.reactant = null;
+            this.hasPoured = true;
+            object.hasPoured = true;
         }
-        if (isTouching(Liquids.class)) {
-            canPour = true;
-        } else {
-            canPour = false;
-        }
-        pour.setLocation(getX(), getY() - 60);
+    }
+
+    public Liquids getBeakerReactant() {
+        return reactant;
     }
 
     public static int getBeakerIndex() {
@@ -76,13 +95,5 @@ public class Beaker extends Items
     public static void resetBeakerIndex() {
         beakerIndex = -1;
     }
-    private boolean hasReactant = false;
-    private void addingAReactant() {
-        if (isTouching(Chemical_Shelf.class) && !hasReactant) {
-            Liquids liquid = new Liquids("Water","H2O",100);
-            Actor beaker = (Actor) MyWorld.beakers.get(beakerIndex);
-            getWorld().addObject(liquid, beaker.getX()+1,beaker.getY()+6);
-            hasReactant = true;
-        }
-    }
+
 }
