@@ -51,7 +51,7 @@ public class Items extends Actor
 
     // Gravity Systems
     private final int GRAVITY = 1;
-    protected int ySpeed;
+    private int ySpeed;
     private void gravity() {
         int height = getImage().getHeight();
         Actor object;
@@ -86,14 +86,6 @@ public class Items extends Actor
         return onGround;
     }
 
-    private boolean isSelfColliding() {
-        boolean selfCollide = false;
-        if (isTouching(this.getClass())) {
-            selfCollide = true;
-        }
-        return selfCollide;
-    }
-
     protected Actor checkBottom(Actor actor) {
         int height = getImage().getHeight();
         int width = getImage().getWidth();
@@ -102,6 +94,7 @@ public class Items extends Actor
         for (int x = 0; x < 3; x++) {
             object = getOneObjectAtOffset(point, height/2, actor.getClass());
             if (object != null) {
+                System.out.println(object+"");
                 return object;
             }
             point += width/2;
