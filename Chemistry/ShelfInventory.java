@@ -4,11 +4,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Owen P. Desjardins 
  * @version [6/12/2023]
  */
-public class Chemistry_Shelf_Inventory extends GUI
+public class ShelfInventory
+ extends GUI
 {
     public boolean isOpened = false;
     private GreenfootImage img;
-    public Chemistry_Shelf_Inventory() {
+    public ShelfInventory() {
         img = new GreenfootImage(900,500);
         img.setColor(new Color(167,89,35));
         img.fill();

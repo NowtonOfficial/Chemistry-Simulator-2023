@@ -29,7 +29,7 @@ public class Beaker extends Items
                 setBeakerReactant();
             }
         } else {
-            if (isTouching(Chemical_Shelf.class)) {
+            if (isTouching(Shelf.class)) {
                 addingAReactant();
             }
         }
