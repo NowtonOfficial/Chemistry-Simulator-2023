@@ -4,10 +4,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Owen P. Desjardins
  * @version [6/11/2023]
  */
-public class Chemical_Shelf extends Equipment
+public class Shelf extends Equipment
 {
-    public static Chemistry_Shelf_Inventory csi = new Chemistry_Shelf_Inventory();
-    public Chemical_Shelf() {
+    public static ShelfInventory csi = new ShelfInventory();
+    public Shelf() {
         GreenfootImage img = new GreenfootImage(320,175);
         img.setColor(new Color(39,105,36));
         img.fill();

@@ -26,7 +26,9 @@ public class Reactants extends Actor
     }
     public void act()
     {
-        
+        if (!onScreen()) {
+            getWorld().removeObject(this);
+        }
     }
     private boolean onScreen() {
         boolean onScreen = true;

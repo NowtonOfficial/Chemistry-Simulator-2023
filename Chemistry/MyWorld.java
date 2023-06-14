@@ -13,12 +13,12 @@ public class MyWorld extends World
     public MyWorld()
     {    
         super(1000, 600, 1,false);
-        setPaintOrder(Chemistry_Shelf_Inventory.class, Items.class, Reactants.class, Particles.class, Equipment.class, ItemSpawner.class,Desktop.class);
+        setPaintOrder(ShelfInventory.class, Items.class, Reactants.class, Particles.class, Equipment.class, ItemSpawner.class,Desktop.class);
         addObject(desk,500,600);
         addObject(new ItemSpawner("beakers"),150,495);
         addObject(new ItemSpawner("testtubes"),750,475);
         addObject(burner, 450, 490);
-        addObject(new Chemical_Shelf(),750,150);
+        addObject(new Shelf(),750,150);
 
         Beaker.resetBeakerIndex();
         
