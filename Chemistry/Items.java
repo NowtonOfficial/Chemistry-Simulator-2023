@@ -56,11 +56,15 @@ public class Items extends Actor
         int height = getImage().getHeight();
         Actor object;
         if (isTouching(Desktop.class)) {
-            object = checkBottom(MyWorld.desk);
+            object = checkBottomFor(Desktop.class);
         } else if (isTouching(Burner.class)) {
-            object = checkBottom(MyWorld.burner);
+            object = checkBottomFor(Burner.class);
+        } else if (isTouching(Flask.class)){
+            object = checkBottomFor(Flask.class);
+        } else if (isTouching(Beaker.class)){
+            object = checkBottomFor(Beaker.class);
         } else {
-            object = checkBottom(this);
+            object = null;
         }
         if (!isGrounded() && object == null) {
             ySpeed += GRAVITY;
@@ -86,15 +90,14 @@ public class Items extends Actor
         return onGround;
     }
 
-    protected Actor checkBottom(Actor actor) {
+    protected Actor checkBottomFor(Class actor) {
         int height = getImage().getHeight();
         int width = getImage().getWidth();
         Actor object = null;
         int point = -width/2;
         for (int x = 0; x < 3; x++) {
-            object = getOneObjectAtOffset(point, height/2, actor.getClass());
+            object = getOneObjectAtOffset(point, height/2, actor);
             if (object != null) {
-                System.out.println(object+"");
                 return object;
             }
             point += width/2;
