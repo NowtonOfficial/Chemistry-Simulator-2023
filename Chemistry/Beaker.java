@@ -26,7 +26,7 @@ public class Beaker extends Items
             }
             updateReactantPosition();
             if (isTouching(Beaker.class) && Greenfoot.mouseClicked(this)) {
-                setBeakerReactant();
+                changeBeakerReactant();
             }
         } else {
             if (isTouching(Shelf.class)) {
@@ -66,14 +66,25 @@ public class Beaker extends Items
     public static void resetHasPoured() {
         hasPoured = false;
     }
-    public void setBeakerReactant() {
+    public void changeBeakerReactant() {
         Beaker object = (Beaker) getOneIntersectingObject(Beaker.class);
-        if (!object.hasPoured) {
+        if (!object.hasPoured && object.reactant == null && this.reactant != null) {
+            object.reactant = this.reactant;
+            this.reactant = null;
+            this.hasPoured = true;
+            object.hasPoured = true;
+        } else if (!object.hasPoured && object.reactant != null && this.reactant != null) {
+            Reactants objectsReactant = object.reactant;
+            Reactants thisReactant = this.reactant;
             object.reactant = this.reactant;
             this.reactant = null;
             this.hasPoured = true;
             object.hasPoured = true;
         }
+    }
+    
+    private Color mixingColors(Color objectColor, Color thisColor) {
+        
     }
 
     public Liquids getBeakerReactant() {
