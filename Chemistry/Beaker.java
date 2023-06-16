@@ -37,7 +37,14 @@ public class Beaker extends Items
     }
 
     private void addingAReactant() {
-        reactant = new Liquids("","",100);
+        int type = Greenfoot.getRandomNumber(2);
+        String moleculeType = "";
+        if (type == 1) {
+            moleculeType = "acid";
+        } else {
+            moleculeType = "base";
+        }
+        reactant = new Liquids("",moleculeType,100);
         getWorld().addObject(reactant,getX(), getY());
     } 
 
@@ -76,9 +83,10 @@ public class Beaker extends Items
             return;
         }
         if (object.reactant != null) {
+            String newType = Reactions.checkReaction(object.reactant.getMoleculeType(),this.reactant.getMoleculeType());
             Liquids temp = object.reactant;
             getWorld().removeObject(object.reactant);
-            object.reactant = mixingColors(temp, this.reactant);
+            object.reactant = mixingColors(temp, this.reactant, newType);
             getWorld().removeObject(this.reactant);
             getWorld().addObject(object.reactant,object.getX(),object.getY());
             this.reactant = null;
@@ -92,8 +100,8 @@ public class Beaker extends Items
         } 
     }
 
-    private Liquids mixingColors(Liquids thatObject, Liquids thisObject) {
-        Liquids returnedReactant = new Liquids("","",100);
+    private Liquids mixingColors(Liquids thatObject, Liquids thisObject, String newMoleculeType) {
+        Liquids returnedReactant = new Liquids("",newMoleculeType,100);
         int thatRed = thatObject.getImage().getColor().getRed();
         int thatGreen = thatObject.getImage().getColor().getGreen();
         int thatBlue = thatObject.getImage().getColor().getBlue();

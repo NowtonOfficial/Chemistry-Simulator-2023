@@ -8,7 +8,7 @@ public class Reactants extends Actor
 {
     protected int boilingTemp;
     protected String name;
-    protected String molecularFormula;
+    protected String moleculeType;
     // TEMPORARY COLOR RANDOMIZER!!!
     int r = Greenfoot.getRandomNumber(255);
     int g = Greenfoot.getRandomNumber(255);
@@ -39,6 +39,9 @@ public class Reactants extends Actor
     }
     public int getPhaseType() {
         return phase;
+    }
+    public String getMoleculeType() {
+        return moleculeType;
     }
 
 }
