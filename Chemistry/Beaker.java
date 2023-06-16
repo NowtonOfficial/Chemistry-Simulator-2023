@@ -69,7 +69,11 @@ public class Beaker extends Items
     public void changeBeakerReactant() {
         Beaker object = (Beaker) getOneIntersectingObject(Beaker.class);
         if (!object.hasPoured && object.reactant != null && this.reactant != null) {
-            object.reactant = mixingColors(object.reactant, this.reactant);
+            Liquids temp = object.reactant;
+            getWorld().removeObject(object.reactant);
+            object.reactant = mixingColors(temp, this.reactant);
+            getWorld().removeObject(this.reactant);
+            getWorld().addObject(object.reactant,object.getX(),object.getY());
             this.reactant = null;
             this.hasPoured = true;
             object.hasPoured = true;
