@@ -7,7 +7,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Flask extends Items
 {
     public Flask() {
-        super("testtube.png");
+        super("flask.png");
     }
     public void act()
     {
