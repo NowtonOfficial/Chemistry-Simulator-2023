@@ -24,7 +24,9 @@ public class Items extends Actor
         if (Greenfoot.mouseDragged(this) || isBeingHeld())
         {
             MouseInfo mouse = Greenfoot.getMouseInfo();
-            setLocation(mouse.getX(), mouse.getY());
+            if (mouse != null) {
+                setLocation(mouse.getX(), mouse.getY());
+            }
         } else {
             gravity();
         }

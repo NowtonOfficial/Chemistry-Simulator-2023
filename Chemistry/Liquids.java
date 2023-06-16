@@ -15,8 +15,5 @@ public class Liquids extends Reactants
     public void act()
     {
         super.act();
-        /*if (MyWorld.beakers.size() == 0) {
-            getWorld().removeObject(this);
-        }*/
     }
 }

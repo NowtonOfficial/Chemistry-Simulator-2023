@@ -26,7 +26,7 @@ public class Beaker extends Items
             }
             updateReactantPosition();
             if (isTouching(Beaker.class) && Greenfoot.mouseClicked(this)) {
-                setBeakerReactant();
+                changeBeakerReactant();
             }
         } else {
             if (isTouching(Shelf.class)) {
@@ -66,14 +66,54 @@ public class Beaker extends Items
     public static void resetHasPoured() {
         hasPoured = false;
     }
-    public void setBeakerReactant() {
+
+    public void changeBeakerReactant() {
+        if (this.reactant == null) {
+            return;
+        }
         Beaker object = (Beaker) getOneIntersectingObject(Beaker.class);
-        if (!object.hasPoured) {
+        if (object.hasPoured) {
+            return;
+        }
+        if (object.reactant != null) {
+            Liquids temp = object.reactant;
+            getWorld().removeObject(object.reactant);
+            object.reactant = mixingColors(temp, this.reactant);
+            getWorld().removeObject(this.reactant);
+            getWorld().addObject(object.reactant,object.getX(),object.getY());
+            this.reactant = null;
+            this.hasPoured = true;
+            object.hasPoured = true;
+        } else {
             object.reactant = this.reactant;
             this.reactant = null;
             this.hasPoured = true;
             object.hasPoured = true;
-        }
+        } 
+    }
+
+    private Liquids mixingColors(Liquids thatObject, Liquids thisObject) {
+        Liquids returnedReactant = new Liquids("","",100);
+        int thatRed = thatObject.getImage().getColor().getRed();
+        int thatGreen = thatObject.getImage().getColor().getGreen();
+        int thatBlue = thatObject.getImage().getColor().getBlue();
+        int thatAlpha = thatObject.getImage().getColor().getAlpha();
+
+        int thisRed = thisObject.getImage().getColor().getRed();
+        int thisGreen = thisObject.getImage().getColor().getGreen();
+        int thisBlue = thisObject.getImage().getColor().getBlue();
+        int thisAlpha = thisObject.getImage().getColor().getAlpha();
+
+        int newRed = (thatRed + thisRed) / 2;
+        int newGreen = (thatGreen + thisGreen) / 2;
+        int newBlue = (thatBlue + thisBlue) / 2;
+        int newAlpha = Math.max(thatAlpha,thisAlpha);
+
+        GreenfootImage img = new GreenfootImage(66,70);
+        img.setColor(new Color(newRed,newGreen,newBlue,newAlpha));
+        img.fill();
+        returnedReactant.setImage(img);
+        return returnedReactant;
     }
 
     public Liquids getBeakerReactant() {
