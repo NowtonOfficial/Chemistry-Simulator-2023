@@ -1,3 +1,6 @@
+import java.util.Scanner;
+import java.io.*;
+import java.nio.file.*;
 /**
  * @author Owen P. Desjardins
  * @version [6/12/2023]
@@ -21,5 +24,14 @@ public class Reactions
             newMoleculeType = "base";
         } 
         return newMoleculeType;
+    }
+
+    public static String moleculeName(String type) throws Exception{
+        Path path = Paths.get("molecules/"+type+"s.txt");
+        long lines = Files.lines(path).count();
+        int rand = (int) (Math.random()*lines);
+        String name = Files.readAllLines(path).get(rand);
+        System.out.println("Molecule Type: "+ type + " Lines: "+lines+" Random Line: "+ rand); 
+        return name;
     }
 }

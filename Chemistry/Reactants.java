@@ -29,6 +29,14 @@ public class Reactants extends Actor
         if (!onScreen()) {
             getWorld().removeObject(this);
         }
+        if (moleculeType.equals("water")) {
+            GreenfootImage img = new GreenfootImage(66,70);
+            img.setColor(new Color(0,0,255,30)); 
+            img.fill();
+            setImage(img);
+        }
+        GreenfootImage img = new GreenfootImage(66,70);
+        img.drawString("TEST",66,70);
     }
     private boolean onScreen() {
         boolean onScreen = true;

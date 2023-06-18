@@ -30,13 +30,18 @@ public class Beaker extends Items
             }
         } else {
             if (isTouching(Shelf.class)) {
-                addingAReactant();
+                try {
+                    addingAReactant();
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
         super.act();
     }
 
-    private void addingAReactant() {
+    private void addingAReactant() throws Exception{
         int type = Greenfoot.getRandomNumber(2);
         String moleculeType = "";
         if (type == 1) {
@@ -44,7 +49,8 @@ public class Beaker extends Items
         } else {
             moleculeType = "base";
         }
-        reactant = new Liquids("",moleculeType,100);
+        String name = Reactions.moleculeName(moleculeType);
+        reactant = new Liquids(name,moleculeType,100);
         getWorld().addObject(reactant,getX(), getY());
     } 
 
