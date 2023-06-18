@@ -9,7 +9,7 @@ public class Beaker extends Items
     private Boiling bubbles = new Boiling();
     private static Pouring pour = new Pouring();
     private static int beakerIndex = -1;
-    public Liquids reactant;
+    private Liquids reactant;
     public Beaker() {
         super("beaker.png");
         MyWorld.beakers.add(this);
@@ -19,11 +19,9 @@ public class Beaker extends Items
     public void act()
     {
         if (reactant != null) {
-            if (reactant.getPhaseType() == 1) {
-                canBoil = true;
-                canPour = true;
-                boilTheBeaker();
-            }
+            canBoil = true;
+            canPour = true;
+            boilTheBeaker();
             updateReactantPosition();
             if (isTouching(Beaker.class) && Greenfoot.mouseClicked(this)) {
                 changeBeakerReactant();
@@ -37,7 +35,18 @@ public class Beaker extends Items
     }
 
     private void addingAReactant() {
-        reactant = new Liquids("","",100);
+        int type = Greenfoot.getRandomNumber(2);
+        String moleculeType = "";
+        if (type == 1) {
+            moleculeType = "acid";
+        } else {
+            moleculeType = "base";
+        }
+        String fullName = Reactions.moleculeName(moleculeType);
+        String temp = fullName.substring(0,fullName.indexOf('-')+1);
+        String displayName = temp.replace("-","");//For some reason I have to do this to avoid an index error...
+        String formulaName = fullName.substring(fullName.indexOf('-')+1);
+        reactant = new Liquids(displayName,moleculeType,formulaName);
         getWorld().addObject(reactant,getX(), getY());
     } 
 
@@ -76,9 +85,16 @@ public class Beaker extends Items
             return;
         }
         if (object.reactant != null) {
+            String newType = Reactions.checkReaction(object.reactant.getMoleculeType(),this.reactant.getMoleculeType());
+            String newFormula = "";
+            String newDisplayName = "";
+            if (newType.equals("water")) {
+                newFormula = "H2O";
+                newDisplayName = "Dihydrogen Monoxide";
+            }
             Liquids temp = object.reactant;
             getWorld().removeObject(object.reactant);
-            object.reactant = mixingColors(temp, this.reactant);
+            object.reactant = mixingColors(temp, this.reactant, newType, newFormula,newDisplayName);
             getWorld().removeObject(this.reactant);
             getWorld().addObject(object.reactant,object.getX(),object.getY());
             this.reactant = null;
@@ -92,8 +108,8 @@ public class Beaker extends Items
         } 
     }
 
-    private Liquids mixingColors(Liquids thatObject, Liquids thisObject) {
-        Liquids returnedReactant = new Liquids("","",100);
+    private Liquids mixingColors(Liquids thatObject, Liquids thisObject, String newMoleculeType, String newFormula,String displayName) {
+        Liquids returnedReactant = new Liquids(displayName,newMoleculeType,newFormula);
         int thatRed = thatObject.getImage().getColor().getRed();
         int thatGreen = thatObject.getImage().getColor().getGreen();
         int thatBlue = thatObject.getImage().getColor().getBlue();

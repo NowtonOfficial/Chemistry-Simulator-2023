@@ -6,30 +6,38 @@ import java.util.ArrayList;
  */
 public class Reactants extends Actor
 {
-    protected int boilingTemp;
-    protected String name;
-    protected String molecularFormula;
+    protected String displayName;
+    protected String moleculeType;
+    protected String formulaName;
     // TEMPORARY COLOR RANDOMIZER!!!
     int r = Greenfoot.getRandomNumber(255);
     int g = Greenfoot.getRandomNumber(255);
     int b = Greenfoot.getRandomNumber(255);
     int alpha = Greenfoot.getRandomNumber(70) +100;
-    private int phase;
-    public Reactants(int phaseType) {
-        phase = phaseType;
-        if (phaseType == 1) {
-            GreenfootImage img = new GreenfootImage(66,70);
-            img.setColor(new Color(r,g,b,alpha)); 
-            img.fill();
-            setImage(img);
-        }
+    public Reactants() {
+
+        GreenfootImage img = new GreenfootImage(66,70);
+        img.setColor(new Color(r,g,b,alpha)); 
+        img.fill();
+        setImage(img);
+
     }
+
     public void act()
     {
         if (!onScreen()) {
             getWorld().removeObject(this);
         }
+        if (moleculeType.equals("water")) {
+            GreenfootImage img = new GreenfootImage(66,70);
+            img.setColor(new Color(0,0,255,30)); 
+            img.fill();
+            setImage(img);
+        }
+        GreenfootImage img = new GreenfootImage(66,70);
+        img.drawString("TEST",66,70);
     }
+
     private boolean onScreen() {
         boolean onScreen = true;
         if (getX() < 10 || getX() > 1010 || getY() > 610) {
@@ -37,8 +45,9 @@ public class Reactants extends Actor
         }
         return onScreen;
     }
-    public int getPhaseType() {
-        return phase;
+
+    public String getMoleculeType() {
+        return moleculeType;
     }
 
 }
