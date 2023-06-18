@@ -14,19 +14,20 @@ public class Reactants extends Actor
     int g = Greenfoot.getRandomNumber(255);
     int b = Greenfoot.getRandomNumber(255);
     int alpha = Greenfoot.getRandomNumber(70) +100;
+    protected Label label;
     public Reactants() {
-
         GreenfootImage img = new GreenfootImage(66,70);
         img.setColor(new Color(r,g,b,alpha)); 
         img.fill();
         setImage(img);
-
     }
 
     public void act()
     {
         if (!onScreen()) {
             getWorld().removeObject(this);
+            getWorld().removeObject(label);
+            return;
         }
         if (moleculeType.equals("water")) {
             GreenfootImage img = new GreenfootImage(66,70);
