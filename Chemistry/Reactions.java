@@ -3,9 +3,9 @@ import java.io.*;
 import java.nio.file.*;
 /**
  * @author Owen P. Desjardins
- * @version [6/12/2023]
+ * @version [6/17/2023]
  */
-public class Reactions  
+public class Reactions 
 {
 
     public Reactions()
@@ -26,11 +26,17 @@ public class Reactions
         return newMoleculeType;
     }
 
-    public static String moleculeName(String type) throws Exception{
+    public static String moleculeName(String type) {
         Path path = Paths.get("molecules/"+type+"s.txt");
-        long lines = Files.lines(path).count();
-        int rand = (int) (Math.random()*lines);
-        String name = Files.readAllLines(path).get(rand);
+        String name;
+        try {
+            long lines = Files.lines(path).count();
+            int rand = (int) (Math.random()*lines);
+            name = Files.readAllLines(path).get(rand);
+        } catch (IOException e) {
+            System.out.println("File not found");
+            return null;
+        }
         return name;
     }
 }

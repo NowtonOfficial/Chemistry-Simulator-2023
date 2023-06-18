@@ -28,18 +28,13 @@ public class Beaker extends Items
             }
         } else {
             if (isTouching(Shelf.class)) {
-                try {
-                    addingAReactant();
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
+                addingAReactant();
             }
         }
         super.act();
     }
 
-    private void addingAReactant() throws Exception{
+    private void addingAReactant() {
         int type = Greenfoot.getRandomNumber(2);
         String moleculeType = "";
         if (type == 1) {
@@ -49,7 +44,7 @@ public class Beaker extends Items
         }
         String fullName = Reactions.moleculeName(moleculeType);
         String temp = fullName.substring(0,fullName.indexOf('-')+1);
-        String displayName = temp.replace("-","");
+        String displayName = temp.replace("-","");//For some reason I have to do this to avoid an index error...
         String formulaName = fullName.substring(fullName.indexOf('-')+1);
         reactant = new Liquids(displayName,moleculeType,formulaName);
         getWorld().addObject(reactant,getX(), getY());
