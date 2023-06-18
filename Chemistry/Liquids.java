@@ -13,10 +13,10 @@ public class Liquids extends Reactants
         this.formulaName = formulaName;
         this.label = new Label(formulaName);
     }
+
     public void act()
     {
         super.act();
-        getWorld().addObject(label,getX(),getY()-56);
-        label.setLocation(getX()+8, getY()-56);
+        
     }
 }

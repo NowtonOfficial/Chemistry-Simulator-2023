@@ -8,8 +8,8 @@ public class Label extends Actor
 {
     private String text;
     public Label(String text) {
-        GreenfootImage img = new GreenfootImage (text.length()*10, 30);
-        img.drawString(text, 2, 20); 
+        GreenfootImage img = new GreenfootImage (text,20,Color.BLACK,null);
+        img.setColor(new Color(100,100,100));
         setImage (img);
         this.text = text;
     }
