@@ -6,11 +6,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Liquids extends Reactants
 {
-    public Liquids(String name, String moleculeType,int bp /*BOILING POINT*/) {
-        super(1);
-        this.name = name;
-        this.boilingTemp = bp;
+    public Liquids(String displayName, String moleculeType, String formulaName) {
+        super();
+        this.displayName = displayName;
         this.moleculeType = moleculeType;
+        this.formulaName = formulaName;
     }
     public void act()
     {

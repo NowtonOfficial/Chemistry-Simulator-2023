@@ -31,7 +31,6 @@ public class Reactions
         long lines = Files.lines(path).count();
         int rand = (int) (Math.random()*lines);
         String name = Files.readAllLines(path).get(rand);
-        System.out.println("Molecule Type: "+ type + " Lines: "+lines+" Random Line: "+ rand); 
         return name;
     }
 }
