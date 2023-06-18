@@ -40,7 +40,7 @@ Mercury(I) Hydroxide-Hg2(OH)2
 Mercury(II) Hydroxide-Hg(OH)2
 Molybdenum Hydroxide-Mo(OH)3
 Neodymium Hydroxide-Nd(OH)3
-Nickel Oxo-hydroxide-NiOOH
+Nickel Oxohydroxide-NiOOH
 Nickel(II) Hydroxide-Ni(OH)2
 Nickel(III) Hydroxide-Ni(OH)3
 Niobium Hydroxide-Nb(OH)3
