@@ -11,7 +11,7 @@ public class Liquids extends Reactants
         this.displayName = displayName;
         this.moleculeType = moleculeType;
         this.formulaName = formulaName;
-        this.label = new Label(formulaName);
+        this.label = new Label(formulaName,displayName);
     }
 
     public void act()

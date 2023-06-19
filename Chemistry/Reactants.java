@@ -28,6 +28,9 @@ public class Reactants extends Actor
             getWorld().removeObject(label);
             getWorld().removeObject(this);
             return;
+        } else {
+            getWorld().addObject(label,getX(),getY()-56);
+            label.setLocation(this.getX(), this.getY()-56);
         }
         if (moleculeType.equals("water")) {
             GreenfootImage img = new GreenfootImage(66,70);
@@ -35,8 +38,6 @@ public class Reactants extends Actor
             img.fill();
             setImage(img);
         }
-        getWorld().addObject(label,getX(),getY()-56);
-        label.setLocation(this.getX(), this.getY()-56);
     }
 
     private boolean onScreen() {
