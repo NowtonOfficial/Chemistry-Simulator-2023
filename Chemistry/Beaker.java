@@ -78,6 +78,7 @@ public class Beaker extends Items
 
     public void changeBeakerReactant() {
         if (this.reactant == null) {
+            getWorld().removeObject(this.reactant.label);
             return;
         }
         Beaker object = (Beaker) getOneIntersectingObject(Beaker.class);
@@ -93,9 +94,11 @@ public class Beaker extends Items
                 newDisplayName = "Dihydrogen Monoxide";
             }
             Liquids temp = object.reactant;
+            getWorld().removeObject(object.reactant.label);
             getWorld().removeObject(object.reactant);
             object.reactant = mixingColors(temp, this.reactant, newType, newFormula,newDisplayName);
             getWorld().removeObject(this.reactant);
+            getWorld().removeObject(this.reactant.label);
             getWorld().addObject(object.reactant,object.getX(),object.getY());
             this.reactant = null;
             this.hasPoured = true;

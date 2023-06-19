@@ -22,6 +22,8 @@ public class Reactions
             newMoleculeType = "acid";
         } else if (moleculeType1.equals("base") && moleculeType2.equals("base")||(moleculeType1.equals("base") && moleculeType2.equals("water"))||(moleculeType1.equals("water") && moleculeType2.equals("base"))) {
             newMoleculeType = "base";
+        } else if (moleculeType1.equals("water") && moleculeType2.equals("water")) {
+            newMoleculeType = "water";
         } 
         return newMoleculeType;
     }

@@ -6,15 +6,28 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Label extends Actor
 {
-    private String text;
-    public Label(String text) {
-        GreenfootImage img = new GreenfootImage (text,20,Color.BLACK,null);
-        img.setColor(new Color(100,100,100));
-        setImage (img);
-        this.text = text;
+    private String formula;
+    private String fullName;
+    private GreenfootImage img;
+    public Label(String formula, String fullName) {
+        img = new GreenfootImage(formula,20,Color.BLACK,null);
+        setImage(img);
+        this.formula = formula;
+        this.fullName = fullName;
     }
+
     public void act()
     {
-        // Add your action code here.
+
+    }
+
+    public void toggleLabelTextToFull() {
+        img = new GreenfootImage(fullName,20,Color.BLACK,null);
+        setImage(img);
+    }
+    
+    public void toggleLabelTextToFormula() {
+        img = new GreenfootImage(formula,20,Color.BLACK,null);
+        setImage(img);
     }
 }
