@@ -14,19 +14,20 @@ public class Reactants extends Actor
     int g = Greenfoot.getRandomNumber(255);
     int b = Greenfoot.getRandomNumber(255);
     int alpha = Greenfoot.getRandomNumber(70) +100;
+    protected Label label;
     public Reactants() {
-
         GreenfootImage img = new GreenfootImage(66,70);
         img.setColor(new Color(r,g,b,alpha)); 
         img.fill();
         setImage(img);
-
     }
 
     public void act()
     {
         if (!onScreen()) {
+            getWorld().removeObject(label);
             getWorld().removeObject(this);
+            return;
         }
         if (moleculeType.equals("water")) {
             GreenfootImage img = new GreenfootImage(66,70);
@@ -34,13 +35,13 @@ public class Reactants extends Actor
             img.fill();
             setImage(img);
         }
-        GreenfootImage img = new GreenfootImage(66,70);
-        img.drawString("TEST",66,70);
+        getWorld().addObject(label,getX(),getY()-56);
+        label.setLocation(this.getX(), this.getY()-56);
     }
 
     private boolean onScreen() {
         boolean onScreen = true;
-        if (getX() < 10 || getX() > 1010 || getY() > 610) {
+        if (getX() < 11 || getX() > 1011 || getY() > 616) {
             onScreen = false;
         }
         return onScreen;
