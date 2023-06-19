@@ -8,9 +8,8 @@ public class Shelf extends Equipment
 {
     public static ShelfInventory csi = new ShelfInventory();
     public Shelf() {
-        GreenfootImage img = new GreenfootImage(320,175);
-        img.setColor(new Color(39,105,36));
-        img.fill();
+        GreenfootImage img = new GreenfootImage("shelf.png");
+        img.scale(img.getWidth() *2, img.getHeight() *2);
         setImage(img);
     }
     public void act()
