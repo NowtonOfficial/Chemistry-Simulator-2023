@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Shelf extends Equipment
 {
-    public static ShelfInventory csi = new ShelfInventory();
+    // Shelf to ad reacntants to beakers.
     public Shelf() {
         GreenfootImage img = new GreenfootImage("shelf.png");
         img.scale(img.getWidth() *2, img.getHeight() *2);
@@ -15,8 +15,5 @@ public class Shelf extends Equipment
     public void act()
     {
         super.act();
-        if (Greenfoot.mouseClicked(this)) {
-            csi.isOpened = true;
-        }
     }
 }

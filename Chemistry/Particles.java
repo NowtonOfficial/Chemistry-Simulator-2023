@@ -12,16 +12,18 @@ public class Particles extends Actor
     protected int changeInterval;
     protected int finalMultiplier;
     protected String imageName;
+    protected int animationCounter = 0;
+    // Particle super class using animations.
     public Particles(int num) {
         particleChangeRate = num;
     }
-    protected int animationCounter = 0;
+    
     public void act()
     {
         animationCounter++;
         animator();
     }
-
+    // so many headaches were caused making this... -_-
     private void animator() {
         if (animationCounter % changeInterval == 0 && animationCounter <= changeInterval * finalMultiplier) {
             int interval = animationCounter / changeInterval;

@@ -9,6 +9,7 @@ public class Label extends Actor
     private String formula;
     private String fullName;
     private GreenfootImage img;
+    // A label for the reactants molecular formula and display name.
     public Label(String formula, String fullName) {
         img = new GreenfootImage(formula,20,Color.BLACK,null);
         setImage(img);
@@ -21,6 +22,7 @@ public class Label extends Actor
 
     }
 
+    // Toggling between the different naming types.
     public void toggleLabelTextToFull() {
         img = new GreenfootImage(fullName,20,Color.BLACK,null);
         setImage(img);

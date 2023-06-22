@@ -1,13 +1,8 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-/**
- * Write a description of class Desktop here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class Desktop extends Actor
 {
+    // A surface for the Items to sit on.
     public Desktop() {
         GreenfootImage img = new GreenfootImage(1000,100);
         img.setColor(Color.GREEN);

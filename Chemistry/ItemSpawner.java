@@ -7,8 +7,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class ItemSpawner extends Actor
 {
     GreenfootImage image;
-    
     int itemID;
+    // Create Beakers and Flasks on click for user.
     public ItemSpawner(String type) {
         if (type.equalsIgnoreCase("beakers")) {
             image = new GreenfootImage(150,110);
@@ -25,6 +25,7 @@ public class ItemSpawner extends Actor
 
     public void act()
     {
+        // If clicked, check the item's ID to determine either a beaker or flask should be spawned.
         if (Greenfoot.mouseClicked(this)) {
             if (itemID == 0) {
                 getWorld().addObject(new Beaker(), this.getX(), this.getY());

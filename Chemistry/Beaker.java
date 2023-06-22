@@ -10,12 +10,16 @@ public class Beaker extends Items
     private static Pouring pour = new Pouring();
     private static int beakerIndex = -1;
     private Liquids reactant;
+    private boolean isBoiling = false;
+    private boolean canBoil = false;
+    private boolean hasIndicator = false;
+    private boolean canPour = false;
+    private static boolean hasPoured = false;
     public Beaker() {
         super("beaker.png");
         MyWorld.beakers.add(this);
     }
-    private boolean isBoiling = false;
-    private boolean canBoil = false;
+
     public void act()
     {
         if (reactant != null) {
@@ -23,17 +27,19 @@ public class Beaker extends Items
             canPour = true;
             boilTheBeaker();
             updateReactantPosition();
+            // Mixing Reactants
             if (isTouching(Beaker.class) && Greenfoot.mouseClicked(this)) {
                 changeBeakerReactant();
             }
         } else {
+            // If in contact with the Shelf, randomly add a new Reactant.
             if (isTouching(Shelf.class)) {
                 addingAReactant();
             }
         }
         super.act();
     }
-
+    // Randomly loading a new Reactant to beaker.
     private void addingAReactant() {
         int type = Greenfoot.getRandomNumber(2);
         String moleculeType = "";
@@ -49,13 +55,12 @@ public class Beaker extends Items
         reactant = new Liquids(displayName,moleculeType,formulaName);
         getWorld().addObject(reactant,getX(), getY());
     } 
-
+    // Updating reactant position relative to the beaker.
     private void updateReactantPosition() {
         Actor beaker = (Actor) MyWorld.beakers.get(MyWorld.beakers.indexOf(this));
         reactant.setLocation(beaker.getX() + 1, beaker.getY() +6);
     }
-    private boolean hasIndicator = false;
-    private boolean canPour = false;
+    // Boiling mechanic
     private void boilTheBeaker() {
         if (isTouching(Flames.class) && canBoil) {
             if (!isBoiling) {
@@ -71,11 +76,11 @@ public class Beaker extends Items
         }
         bubbles.setLocation(getX()+3,getY()-50);
     }
-    private static boolean hasPoured = false;
+    // Has poured resetter.
     public static void resetHasPoured() {
         hasPoured = false;
     }
-
+    // Mixing Reactants
     public void changeBeakerReactant() {
         if (this.reactant == null) {
             getWorld().removeObject(this.reactant.label);
@@ -110,7 +115,7 @@ public class Beaker extends Items
             object.hasPoured = true;
         } 
     }
-
+    // Creating a new Reactant with a mixture between 2 Colors.
     private Liquids mixingColors(Liquids thatObject, Liquids thisObject, String newMoleculeType, String newFormula,String displayName) {
         Liquids returnedReactant = new Liquids(displayName,newMoleculeType,newFormula);
         int thatRed = thatObject.getImage().getColor().getRed();
@@ -138,7 +143,7 @@ public class Beaker extends Items
     public Liquids getBeakerReactant() {
         return reactant;
     }
-
+    // Beaker Index methods.
     public static int getBeakerIndex() {
         return beakerIndex;
     }

@@ -6,6 +6,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Items extends Actor
 {
+
+    private boolean mouseIsDown = false;
+    private final int GRAVITY = 1;
+    private int ySpeed;
+    // Item superclass for the Beaker and Flask objects.
     public Items(String imageName) {
         GreenfootImage img = new GreenfootImage(imageName);
         setImage(img);
@@ -41,7 +46,6 @@ public class Items extends Actor
     }
 
     // Mouse is being held checker
-    private boolean mouseIsDown = false;
     protected boolean isBeingHeld() {
         if (Greenfoot.mousePressed(this)) {
             mouseIsDown = true;
@@ -52,11 +56,10 @@ public class Items extends Actor
     }
 
     // Gravity Systems
-    private final int GRAVITY = 1;
-    private int ySpeed;
     private void gravity() {
         int height = getImage().getHeight();
         Actor object;
+        // Collision Check Part 1.
         if (isTouching(Desktop.class)) {
             object = checkBottomFor(Desktop.class);
         } else if (isTouching(Burner.class)) {
@@ -68,6 +71,7 @@ public class Items extends Actor
         } else {
             object = null;
         }
+        // Collision Chekc Part 2.
         if (!isGrounded() && object == null) {
             ySpeed += GRAVITY;
             setLocation(getX(),getY() + ySpeed);
@@ -83,7 +87,7 @@ public class Items extends Actor
             }
         }
     }
-
+    // Check if item is touching Desktop.
     private boolean isGrounded() {
         boolean onGround = false;
         if (isTouching(Desktop.class)) {
@@ -91,7 +95,7 @@ public class Items extends Actor
         }
         return onGround;
     }
-
+    // Get the object that is touching the item at 3 different points.
     protected Actor checkBottomFor(Class actor) {
         int height = getImage().getHeight();
         int width = getImage().getWidth();
