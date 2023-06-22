@@ -15,6 +15,7 @@ public class Reactants extends Actor
     int b = Greenfoot.getRandomNumber(255);
     int alpha = Greenfoot.getRandomNumber(70) +100;
     protected Label label;
+    // Reactants that fill the beakers.
     public Reactants() {
         GreenfootImage img = new GreenfootImage(66,70);
         img.setColor(new Color(r,g,b,alpha)); 
@@ -24,6 +25,7 @@ public class Reactants extends Actor
 
     public void act()
     {
+        // On screen checker
         if (!onScreen()) {
             getWorld().removeObject(label);
             getWorld().removeObject(this);
@@ -32,6 +34,7 @@ public class Reactants extends Actor
             getWorld().addObject(label,getX(),getY()-56);
             label.setLocation(this.getX(), this.getY()-56);
         }
+        // Is molecule water?
         if (moleculeType.equals("water")) {
             GreenfootImage img = new GreenfootImage(66,70);
             img.setColor(new Color(0,0,255,30)); 

@@ -7,7 +7,7 @@ import java.nio.file.*;
  */
 public class Reactions 
 {
-
+    // My Reaction handler to deal with all reactions.
     public Reactions()
     {
 
